@@ -1,0 +1,51 @@
+#genDsm .dsm {
+    font-family: sans-serif;
+    text-align: center;
+    max-width: 2000px;
+}
+#genDsm table {
+    border-collapse: collapse;
+}
+#genDsm th, td {
+    height: 55px;
+    width: 50px;
+    text-align: center;
+    margin: 10px;
+}
+#genDsm th.rootcomponent {
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    transition: 0.2s ease-out;
+}
+#genDsm th.rootcomponent:hover {
+    background-color: rgb(255, 187, 0);
+    transition: 0.2s ease-in-out;
+}
+#genDsm th.subcomponent {
+    padding: 10px;
+    background-color: rgb(194, 207, 211);
+    cursor: grab;
+    transition: 0.2s ease-out;
+}
+#genDsm th.subcomponent:hover {
+    background-color: rgb(148, 161, 165);
+    transition: 0.2s ease-in-out;
+}
+#genDsm td.selfIntersectCell {
+    background-color: rgb(56, 129, 232);
+}
+#genDsm td.selfIntersectCell:hover {
+    background-color: rgb(20, 83, 171);
+}
+#genDsm td {
+    padding: 10px;
+    background-color: rgb(238, 238, 238);
+    transition: 0.2s ease-out;
+}
+#genDsm td:hover {
+    background-color: rgb(148, 209, 233);
+    transition: 0.2s ease-in-out;
+}
+#genDsm .dsmrow {
+    display: flex;
+}
