@@ -1076,36 +1076,41 @@ function optimizeDSMBandwidth(dsmModel) {
     return optimizedModel;
 }
 
-// DSM generation function wrapper that applies optimization
-function generateOptimizedDSM(dsmModel, parentElement, optimizationOption = "SPS") {
-    let modelToUse;
-    switch (optimizationOption) {
-        case "SPS":
-            // code to execute if expression === value1
+function generateOptimizedDSM(dsmModel, parentElement, method = 'auto') {
+    let optimizedModel;
+    
+    switch(method) {
+        case 'stewards':
+            optimizedModel = optimizeDSMWithStewards(dsmModel);
             break;
-        case "GA":
-            // code to execute if expression === value2
+        case 'genetic':
+            optimizedModel = optimizeDSMWithGeneticAlgorithm(dsmModel);
             break;
-        case "ACO":
-            // code to execute if expression === value2
+        case 'annealing':
+            optimizedModel = optimizeDSMWithSimulatedAnnealing(dsmModel);
             break;
-        case "MOB":
-            // code to execute if expression === value2
+        case 'ant':
+            optimizedModel = optimizeDSMWithAntColony(dsmModel);
             break;
-        case "BW":
-            // code to execute if expression === value2
+        case 'bandwidth':
+            optimizedModel = optimizeDSMBandwidth(dsmModel);
             break;
-        case "BW":
-            // code to execute if expression === value2
+        case 'multi':
+            optimizedModel = optimizeDSMMultiObjective(dsmModel);
             break;
-        case "BW":
-            // code to execute if expression === value2
-            break;
+        case 'auto':
         default:
-            modelToUse = optimizeDSMWithStewards(dsmModel)
-            console.log(`Optimization option not recognized. Defaulting to SPS.`)
-        break; 
+            let elementCount = dsmModel.rootElement.subElements.length;
+            if (elementCount <= 10) {
+                optimizedModel = optimizeDSMWithStewards(dsmModel);
+            } else if (elementCount <= 20) {
+                optimizedModel = optimizeDSMWithSimulatedAnnealing(dsmModel);
+            } else {
+                optimizedModel = optimizeDSMWithGeneticAlgorithm(dsmModel, { generations: 50 });
+            }
+            break;
     }
-    generateDSM(modelToUse, parentElement);
-    return modelToUse;
+    
+    generateDSM(optimizedModel, parentElement);
+    return optimizedModel;
 }
